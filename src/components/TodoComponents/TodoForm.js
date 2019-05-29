@@ -18,8 +18,9 @@ export default class TodoForm extends Component {
             <div>
                 <form action="">
                     <label htmlFor="todoName">New Todo</label>
-                    <input type="text" name="todoName" id="TodoName" onChange = {this.handleChange}/>
-                    <button type="submit">Submit</button>
+                    <input type="text" name="todoName" id="TodoName" placeholder = "...todo" onChange = {this.handleChange}/>
+                    <button type="submit">Add Todo</button>
+                    <button type="reset">Clear completed</button>
                 </form>
             </div>
         )
