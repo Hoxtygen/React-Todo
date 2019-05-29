@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from "./components/TodoComponents/TodoList";
-import TodoForm from './components/TodoComponents/TodoForm';
+import "./components/TodoComponents/Todo.css"
+import Todo from './components/TodoComponents/Todo';
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -10,52 +10,95 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      todoName: "",
+      task: "",
       todos: [
         {
+          //id: new Date(),
           id: 1,
-          todoName: "Go to a meeting in Maryland"
+          task: "Go to a meeting in Maryland",
+          completed: false
         },
         {
+          //id: new Date(),
           id: 2,
-          todoName: "Take the kids to Jurasic park"
+          task: "Take the kids to Jurasic park",
+          completed: false
+          
         },
         {
+          //id: new Date(),
           id: 3,
-          todoName: "Attend Organization end of the year party"
+          task: "Attend Organization end of the year party",
+          completed: false
         },
         {
+          //id: new Date(),
           id: 4,
-          todoName: "Say no to offer from Wasteland"
+          task: "Say no to offer from Wasteland",
+          completed: false
         },
         {
+          //id: new Date(),
           id: 5,
-          todoName: "Go to the rendezvous for some downtime"
+          task: "Go to the rendezvous for some downtime",
+          completed: false
         },
         {
+          //id: new Date(),
           id: 6,
-          todoName: "Solve the mystery surrounding the dancing men"
+          task: "Solve the mystery surrounding the dancing men",
+          completed: false
         }
       ]
     }
+    this.handleAddTodo = this.handleAddTodo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleAddTodo(todoName) {
+  
+  
+
+  handleAddTodo(task){
     let newTodo = {
-      id: this.state.todos.length + 1,
-      todoName: todoName
+      id: new Date(),
+      task: task,
+      completed: false
     }
+    this.setState({
+      todos: this.state.todos.concat(newTodo),
+      completed: false
+		});
   }
+
+  handleChange(e) {
+    this.setState({
+        task: e.target.value
+    })
+}
+
+handleSubmit(e)     {
+    e.preventDefault();
+    let todoItem = this.refs.newTodoItem.value.trim();
+    if (!todoItem) {
+        return
+    } else {
+        this.props.handleAddTodo(todoItem);
+    }
+    this.refs.newTodoItem.value = "";
+}
   
 
   render() {
     return (
-      <div>
+      <div className = "App">
         <h2>Welcome to your Todo App!</h2>
-        
-        <TodoList 
-          {...this.state}
+        <Todo 
+          { ...this.state }
+          handleAddTodo = {this.handleAddTodo}
+          handleChange = {this.handleChange}
+          handleSubmit = {this.handleSubmit}
         />
-        <TodoForm />
+       
       </div>
     );
   }

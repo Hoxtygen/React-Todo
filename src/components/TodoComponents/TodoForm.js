@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 
 export default class TodoForm extends Component {
-    constructor(props)  {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(e) {
-        this.setState({
-            todoName: e.target.value
-        })
-    }
-
-
     render() {
+        const {handleAddTodo, handleChange, handleSubmit } = this.props;
+        //console.log(handleSubmit)
         return (
-            <div>
-                <form action="">
+            <div className = "form-container">
+                <form action="" onSubmit = {this.handleSubmit}>
                     <label htmlFor="todoName">New Todo</label>
-                    <input type="text" name="todoName" id="TodoName" placeholder = "...todo" onChange = {this.handleChange}/>
-                    <button type="submit">Add Todo</button>
+                    <input
+                        ref = "newTodoItem"
+                        type="text" 
+                        name="task" 
+                        id="task" 
+                        placeholder = "...todo" 
+                        onChange = {this.props.handleChange}
+                    />
+                    <button type="submit" onClick={this.props.handleAddTodo}>Add Todo</button>
                     <button type="reset">Clear completed</button>
                 </form>
             </div>

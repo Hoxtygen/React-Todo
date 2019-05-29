@@ -5,16 +5,15 @@ import React, { Component } from 'react'
 
 export default class TodoList extends Component {
     render() {
+        console.log(this.props)
         return (
-            <div>
+            <div className = "todos-container">
                 {
                    // console.log(this.props.todos)
                     this.props.todos.map(todoItem => {
-                        return <li key = {todoItem.id}>
-                                    {todoItem.todoName} 
-                                    <span><button>Add</button></span>
-                                    <span><button>Delete</button></span>
-                                </li>
+                        return <p key = {todoItem.id}>
+                                    {todoItem.task} 
+                                </p>
 
                     })
                 }
