@@ -6,34 +6,37 @@ export default class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todoName: "",
       todos: [
-      {
-        id: 1,
-        todoName: "Go to a meeting in Maryland"
-      },
-      {
-        id: 2,
-        todoName: "Take the kids to Jurasic park"
-      },
-      {
-        id: 3,
-        todoName: "Attend Organization end of the year party"
-      },
-      {
-        id: 4,
-        todoName: "Say no to offer from Wasteland"
-      },
-      {
-        id: 5,
-        todoName: "Go to the rendezvous for some downtime"
-      },
-      {
-        id: 6,
-        todoName: "Solve the mystery surrounding the dancing men"
-      }
-    ]
+        {
+          id: 1,
+          todoName: "Go to a meeting in Maryland"
+        },
+        {
+          id: 2,
+          todoName: "Take the kids to Jurasic park"
+        },
+        {
+          id: 3,
+          todoName: "Attend Organization end of the year party"
+        },
+        {
+          id: 4,
+          todoName: "Say no to offer from Wasteland"
+        },
+        {
+          id: 5,
+          todoName: "Go to the rendezvous for some downtime"
+        },
+        {
+          id: 6,
+          todoName: "Solve the mystery surrounding the dancing men"
+        }
+      ]
+    }
   }
-  }
+
+
 
   render() {
     return (
@@ -41,7 +44,7 @@ export default class Todo extends Component {
         <h2>Hello World</h2>
         <TodoForm />
         <TodoList
-        {...this.state} 
+          {...this.state}
         />
       </div>
     );
