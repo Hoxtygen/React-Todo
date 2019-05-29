@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TodoList from "./TodoList";
+import TodoForm from "./TodoForm";
 
 export default class Todo extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export default class Todo extends Component {
     return (
       <div>
         <h2>Hello World</h2>
+        <TodoForm />
         <TodoList
         {...this.state} 
         />

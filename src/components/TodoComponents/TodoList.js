@@ -10,7 +10,11 @@ export default class TodoList extends Component {
                 {
                    // console.log(this.props.todos)
                     this.props.todos.map(todoItem => {
-                        return <li key = {todoItem.id}>{todoItem.todoName}</li>
+                        return <li key = {todoItem.id}>
+                                    {todoItem.todoName} 
+                                    <span><button>Add</button></span>
+                                    <span><button>Delete</button></span>
+                                </li>
 
                     })
                 }
