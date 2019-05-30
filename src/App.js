@@ -1,6 +1,7 @@
 import React from 'react';
 import "./components/TodoComponents/Todo.css"
 import Todo from './components/TodoComponents/Todo';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -10,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: "",
+      newTask: "",
       todos: [
         {
           //id: new Date(),
@@ -52,27 +53,31 @@ class App extends React.Component {
       ]
     }
     this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   
   
 
-  handleAddTodo(task){
-    let newTodo = {
+  handleAddTodo = (event) =>{
+    event.preventDefault()
+    if (!this.state.newTask) {
+      return;
+    }
+    const newTask = {
       id: new Date(),
-      task: task,
+      task: this.state.newTask,
       completed: false
     }
     this.setState({
-      todos: this.state.todos.concat(newTodo),
-      completed: false
+      todos: this.state.todos.concat(newTask),
+      newTask: ""
 		});
   }
 
-  handleChange(e) {
+  handleChange = (e) =>{
     this.setState({
-        task: e.target.value
+        newTask: e.target.value
     })
 }
 
@@ -93,11 +98,14 @@ handleSubmit(e)     {
       <div className = "App">
         <h2>Welcome to your Todo App!</h2>
         <Todo 
-          { ...this.state }
+          todos = {this.state.todos}
+        />
+         <TodoForm
+         taskName = {this.state.newTask}
+          handleSubmit = {this.handleSubmit}
           handleAddTodo = {this.handleAddTodo}
           handleChange = {this.handleChange}
-          handleSubmit = {this.handleSubmit}
-        />
+      />
        
       </div>
     );

@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class TodoForm extends Component {
-    render() {
-        const {handleAddTodo, handleChange, handleSubmit } = this.props;
-        //console.log(handleSubmit)
-        return (
-            <div className = "form-container">
-                <form action="" onSubmit = {this.handleSubmit}>
+
+
+
+export default function TodoForm({ taskName, handleChange, handleSubmit, handleAddTodo }) {
+    return (
+        <div className = "form-container">
+                <form action="" onSubmit = {handleSubmit}>
                     <label htmlFor="todoName">New Todo</label>
                     <input
-                        ref = "newTodoItem"
+                        //ref = "newTodoItem"
                         type="text" 
                         name="task" 
                         id="task" 
                         placeholder = "...todo" 
-                        onChange = {this.props.handleChange}
+                        onChange = {handleChange}
+                        value = {taskName}
                     />
-                    <button type="submit" onClick={this.props.handleAddTodo}>Add Todo</button>
+                    <button type="submit" onClick={handleAddTodo}>Add Todo</button>
                     <button type="reset">Clear completed</button>
                 </form>
             </div>
-        )
-    }
+    )
 }

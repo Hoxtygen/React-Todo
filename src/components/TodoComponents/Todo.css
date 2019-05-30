@@ -54,4 +54,5 @@ body    {
     font-size: 1rem;
     background-color: #ccc;
     margin-right: 5px;
+    outline: none;
 }
