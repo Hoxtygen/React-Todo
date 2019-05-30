@@ -1,7 +1,7 @@
-import React from 'react';
-import "./components/TodoComponents/Todo.css"
-import Todo from './components/TodoComponents/Todo';
-import TodoForm from './components/TodoComponents/TodoForm';
+import React from "react";
+import "./components/TodoComponents/Todo.css";
+import TodoForm from "./components/TodoComponents/TodoForm";
+import TodoList from "./components/TodoComponents/TodoList"
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -24,7 +24,6 @@ class App extends React.Component {
           id: 2,
           task: "Take the kids to Jurasic park",
           completed: false
-          
         },
         {
           //id: new Date(),
@@ -51,16 +50,12 @@ class App extends React.Component {
           completed: false
         }
       ]
-    }
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    //this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  
-  
+    };
 
-  handleAddTodo = (event) =>{
-    event.preventDefault()
+  }
+
+  handleAddTodo = event => {
+    event.preventDefault();
     if (!this.state.newTask) {
       return;
     }
@@ -68,45 +63,63 @@ class App extends React.Component {
       id: new Date(),
       task: this.state.newTask,
       completed: false
-    }
+    };
     this.setState({
       todos: this.state.todos.concat(newTask),
       newTask: ""
-		});
-  }
+    });
+  };
 
-  handleChange = (e) =>{
+  handleChange = e => {
     this.setState({
-        newTask: e.target.value
-    })
-}
+      newTask: e.target.value
+    });
+  };
 
-handleSubmit(e)     {
+  handleSubmit(e) {
     e.preventDefault();
     let todoItem = this.refs.newTodoItem.value.trim();
     if (!todoItem) {
-        return
+      return;
     } else {
-        this.props.handleAddTodo(todoItem);
+      this.props.handleAddTodo(todoItem);
     }
     this.refs.newTodoItem.value = "";
-}
-  
+  }
+
+  handleComplete = (id) => {
+    this.setState(currState => ({
+      todos: currState.todos.map(todo => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      })
+    }))
+  }
+
+  handleClearCompleted = () => {
+    this.setState(currState =>({
+      todos: currState.todos.filter(todo => !todo.completed)
+    }))
+  }
 
   render() {
     return (
-      <div className = "App">
+      <div className="App">
         <h2>Welcome to your Todo App!</h2>
-        <Todo 
-          todos = {this.state.todos}
+
+      <TodoList
+        todos = {this.state.todos}
+        handleComplete = {this.handleComplete}
         />
-         <TodoForm
-         taskName = {this.state.newTask}
-          handleSubmit = {this.handleSubmit}
-          handleAddTodo = {this.handleAddTodo}
-          handleChange = {this.handleChange}
-      />
-       
+        <TodoForm
+          todos={this.state.todos}
+          handleSubmit={this.handleSubmit}
+          handleAddTodo={this.handleAddTodo}
+          handleChange={this.handleChange}
+          handleClearCompleted = {this.handleClearCompleted}
+        />
       </div>
     );
   }
