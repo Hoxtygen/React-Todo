@@ -4,7 +4,6 @@ import React from 'react'
 
 
 export default function TodoForm({ todo, handleChange, handleSubmit, handleAddTodo, handleClearCompleted }) {
-  console.log(todo);
   const markAsCompleted = () => {
     handleClearCompleted();
   }
