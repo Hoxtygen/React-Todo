@@ -1,17 +1,11 @@
-import React, { Component } from "react";
-import TodoList from "./TodoList";
+import React from "react";
 
-
-
-export default class Todo extends Component {
-  render() {
-    return (
-      <div>
-      <TodoList
-        todos = {this.props.todos}
-        
-      />
-      </div>
-    );
+export default function Todo({todo, handleComplete}) {
+  //console.log(todo);
+  const onMarkComplete = (id) => {
+    handleComplete(todo.id);
   }
+    return (
+        <p className={todo.completed ? 'strikethrough' : ""} onClick = {onMarkComplete}>{todo.task}</p>
+    )
 }
